@@ -16,8 +16,24 @@
     
     height:40px;
 }
+.message-box{
+    display:flex;
+}
 .message{
     background-color: rgb(246, 237, 237,0.5);
     border-radius:0px 10px 10px 0px;
     padding:10px;
+}
+.like{
+    margin-left:-10px;
+    margin-top: 10px;
+    color:blue;
+    display:flex;
+    font-size:15px;
+    background-color:white;
+    border-radius: 5px;
+    height:20px;
+    width:auto;
+    align-items:center;
+    padding:3px;
 }

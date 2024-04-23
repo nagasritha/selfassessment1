@@ -77,3 +77,8 @@ ul{
  top:10vh;
 
 }
+.people-button{
+    background-color:transparent;
+    border-width:0px;
+    cursor:pointer;
+}

@@ -4,7 +4,8 @@ import { IoMdSend } from "react-icons/io";
 import { BsFillPeopleFill } from "react-icons/bs";
 import DisplayMessages from '../DisplayMessages';
 import 'reactjs-popup/dist/index.css';
-import './index.css'
+import { v4 as uuidv4 } from 'uuid';
+import './index.css';
 
 class Chatpage extends Component {
   state = {
@@ -47,16 +48,31 @@ class Chatpage extends Component {
 
   submitMessage = (event) => {
     event.preventDefault();
+    const id = uuidv4();
     const number = Math.floor(Math.random()*5);
     const { msg } = this.state;
-    this.setState(prevState => ({ array: [...prevState.array, {message : msg,
+    this.setState(prevState => ({ array: [...prevState.array, {id,message : msg,
                                                                 person : this.userList[number],
-                                                            color: this.colors[number]}], msg: "" }));
+                                                            color: this.colors[number],
+                                                        likes : 0}], msg: "" }));
   }
 
   setMessage = (event) => {
     const message = event.target.value;
     this.setState({ msg: message });
+  }
+
+  increaseLikes = (id)=>{
+    console.log("Ia ma called")
+    const {array} = this.state;
+    const modifiedArray = array.map(item=>{
+        if(item.id === id){
+            return {...item, likes: item.likes + 1 }
+        }else{
+            return {...item}
+        }
+    })
+    this.setState({array : modifiedArray});
   }
 
   render() {
@@ -70,7 +86,7 @@ class Chatpage extends Component {
             <p>This channel is for company wide chatter</p>
           </div>
           <div>
-            <Popup trigger={<BsFillPeopleFill className='people-icon'/>} position='top right' modal> 
+            <Popup trigger={<button className="people-button"><BsFillPeopleFill className='people-icon'/></button>} position='top right' modal> 
                 <ul className='positioning'>
                     <li>Alan</li>
                     <li>Bob</li>
@@ -84,7 +100,7 @@ class Chatpage extends Component {
         <div className='messages-content' ref={this.elementRef}>
           {array.map((item, index) =>{ 
          
-          return <div key={index}><DisplayMessages itemDetails={item} /></div>})}
+          return <div key={index}><DisplayMessages itemDetails={item} increaseLikes={this.increaseLikes} /></div>})}
         </div>
         <div className="footer">
           <form onSubmit={this.submitMessage} className="form">
