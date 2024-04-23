@@ -1,0 +1,23 @@
+.message-item{
+    display:flex;
+    gap:3px;
+    font-size:20px;
+    align-items: center;
+    font-weight:600;
+}
+.twoLet{
+    width:40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    padding:5px;
+    
+    height:40px;
+}
+.message{
+    background-color: rgb(246, 237, 237,0.5);
+    border-radius:0px 10px 10px 0px;
+    padding:10px;
+}
